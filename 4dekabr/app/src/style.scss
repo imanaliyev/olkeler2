@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    color: var(--color);
+    background-color: var(--bg-color);
+    transition: 200ms;
+}
+input{
+    margin: 50px;
+}
+.container{
+    a{
+        text-decoration: none;
+        color: var(--color);
+    }
+
+    place-items: center;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    ul{
+        margin-bottom: 20px;
+        li{
+            list-style: none;
+          
+        }
+    }
+}
+:root{
+--bg-color: white ;
+--color: black;
+
+}
+.dark{
+    --bg-color: black ;
+    transition: 200ms;
+--color: white;
+
+}
