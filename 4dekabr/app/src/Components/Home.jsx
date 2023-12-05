@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {  Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
 
@@ -16,43 +16,54 @@ function Home() {
       });
   }, []);
 
-  const handleinp=(e)=>{
+  const handleinp = (e) => {
     setInp(e.target.value)
 
   }
 
-  const changeTheme =()=>{
+  const changeTheme = () => {
     document.body.classList.toggle("dark")
+
+
   }
-  const handleSelection=(e)=>{
+  const handleSelection = (e) => {
     setOption(e.target.value)
 
+
+
+
+
   }
+  const filteredRegion = countries.filter(country => country.name.common.toLowerCase().includes(inp.toLocaleLowerCase()) && (option === "" || country.region === option))
   return (
     <div className="App">
-        <button onClick={changeTheme}>theme</button>
-        <input type="text" onChange={(e)=>handleinp(e)}/>
-      
-            {/* <select onChange={()=>handleSelection(e)} name="" >
+      <nav>
 
-                <option value="">Asia</option>
-                <option value="">Europe</option>
-                <option value=""> America</option>
-                <option value="">Oceania</option>
-                <option value="">Africa</option>
-            </select>
-      */}
-    
+        <button className="theme" onClick={changeTheme}><i class="fa-regular fa-sun"></i> <i class="fa-solid fa-moon"></i></button>
+        <input placeholder="search by name..." className="search" type="text" onChange={(e) => handleinp(e)} />
+
+        <select onChange={(e) => handleSelection(e)} name="" >
+          <option value="">All</option>
+          <option value="Asia">Asia</option>
+          <option value="Europe">Europe</option>
+          <option value="Americas"> Americas</option>
+          <option value="Oceania">Oceania</option>
+          <option value="Africa">Africa</option>
+
+        </select>
+
+      </nav>
+
       <div className="container">
-    
-        {countries.filter(x=>x.name.common.toLowerCase().includes(inp.toLowerCase())).map((x) => (
-          <Link to={"detail/name/" + x.name.common}>
+
+        {filteredRegion.map((x) => (
+          <Link to={"/detail/" + x.name.common}>
             <ul key={x.id}>
               <img src={x.flags.png} />
-              <li>{x.name.common}</li>
-              <li>{x.population}</li>
-              <li>{x.region}</li>
-              <li>{x.capital}</li>
+              <li> <b>Country:</b>         {x.name.common}</li>
+              <li> <b>Population:  </b>     {x.population}</li>
+              <li> <b>Continent:  </b>        {x.region}</li>
+              <li> <b>Capital: </b>         {x.capital}</li>
             </ul>
           </Link>
         ))}

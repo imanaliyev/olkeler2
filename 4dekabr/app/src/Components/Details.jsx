@@ -1,33 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import {  useParams } from 'react-router-dom';
 function Details() {
-    let { name } = useParams();
-    const [country, setCountry] = useState(null)
-    console.log(name)
+    let { id } = useParams();
+    const [country, setCountry] = useState([])
+   
     useEffect(() => {
         
 
-        fetch(`https://restcountries.com/v3.1/name/${name}`)
+        fetch("https://restcountries.com/v3.1/name/" + id )
         .then(res=>res.json())
         .then(data=>{
             setCountry(data)
-            console.log(country);
+            
         })
      
     }, [])
-    
+    console.log(country);
   return (
-      <div>
-{console.log(country)}
-{
-    country.map(x=>
-    <ul>
-        <li>
-            {x.name.common}
-        </li>
-    </ul>
-    )
-}
+      <div className='detail'>
+       {country.map(x=>
+        <ul>
+             <img src={x.flags.png} />
+              <li> Country:   {x.name.common}</li>
+              <li> Population:   {x.population}</li>
+              <li> Continent:   {x.region}</li>
+              <li>Capital:    {x.capital}</li>
+              <li>Domain:    {x.tld}</li>
+              <li>Sub-region:   {x.subregion}</li>
+        </ul>)}
+
+
 
     </div>
   )
